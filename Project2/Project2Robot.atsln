@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Project2Robot", "GccApplication1\Project2Robot.cproj", "{4FEB0301-4E95-4365-BC5E-B33B1B1B922B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Release|ARM = Release|ARM
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4FEB0301-4E95-4365-BC5E-B33B1B1B922B}.Debug|ARM.ActiveCfg = Debug|ARM
+		{4FEB0301-4E95-4365-BC5E-B33B1B1B922B}.Debug|ARM.Build.0 = Debug|ARM
+		{4FEB0301-4E95-4365-BC5E-B33B1B1B922B}.Release|ARM.ActiveCfg = Release|ARM
+		{4FEB0301-4E95-4365-BC5E-B33B1B1B922B}.Release|ARM.Build.0 = Release|ARM
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
