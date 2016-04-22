@@ -1,0 +1,7 @@
+21 12:45:47, Info                  CBS    Appl: Selfupdate, Component: amd64_microsoft-windows-ocspsvc.resources_31bf3856ad364e35_0.0.0.0_ja-jp_039b239e73b06d24 (6.1.7601.23126), elevation:2, lower version revision holder: 0.0.0.0
+2015-12-21 12:45:47, Info                  CBS    Applicability(ComponentAnalyzerEvaluateSelfUpdate): Component: amd64_microsoft-windows-ocspsvc.resources_31bf3856ad364e35_6.1.7601.23126_ja-jp_e2492e41a2ec79e1, elevate: 2, applicable(true/false): 0
+2015-12-21 12:45:47, Info                  CBS    Appl: Selfupdate, Component: amd64_microsoft-windows-ocspsvc.resources_31bf3856ad364e35_0.0.0.0_ko-kr_a70500536621343a (6.1.7601.23126), elevation:2, lower version revision holder: 0.0.0.0
+2015-12-21 12:45:47, Info                  CBS    Applicability(ComponentAnalyzerEvaluateSelfUpdate): Component: amd64_microsoft-windows-ocspsvc.resources_31bf3856ad364e35_6.1.7601.23126_ko-kr_85b30af6955d40f7, elevate: 2, applicable(true/false): 0
+2015-12-21 12:45:47, Info                  CBS    Appl: Selfupdate, Component: amd64_microsoft-windows-ocspsvc.resources_31bf3856ad364e35_0.0.0.0_nl-nl_8dd6ccc63f7269cb (6.1.7601.23126), elevation:2, lower version revision holder: 0.0.0.0
+2015-12-21 12:45:47, Info                  CBS    Applicability(ComponentAnalyzerEvaluateSelfUpdate): Component: amd64_microsoft-windows-ocspsvc.resources_31bf3856ad364e35_6.1.7601.23126_nl-nl_6c84d7696eae7688, elevate: 2, applicable(true/false): 0
+2015-12-21 12:45:47, Info                  CBS    A
