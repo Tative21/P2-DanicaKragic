@@ -36,7 +36,7 @@
  */
 #include <asf.h>
 #include <inttypes.h>
-#include <stdio_serial.h>
+//#include <stdio_serial.h>
 #include "SerialUART.h"
 #include "adc/adcFunctions.h"
 #include "Tasks/TaskJoystick.h"

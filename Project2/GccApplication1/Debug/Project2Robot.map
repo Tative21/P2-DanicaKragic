@@ -11083,7 +11083,7 @@ OUTPUT(Project2Robot.elf elf32-littlearm)
  .debug_line    0x00011c1e     0x11a9 src/ASF/thirdparty/wireless/addons/sio2host/uart/sio2host.o
  .debug_line    0x00012dc7     0x1188 src/main.o
 
-.debug_str      0x00000000    0x6816b
+.debug_str      0x00000000    0x681ba
  .debug_str     0x00000000    0x58c35 src/ASF/sam/drivers/tc/tc.o
                               0x58f34 (size before relaxing)
  .debug_str     0x00058c35     0x900f src/DelayFunctions/DelayFunctions.o
@@ -11132,8 +11132,8 @@ OUTPUT(Project2Robot.elf elf32-littlearm)
                                0x9370 (size before relaxing)
  .debug_str     0x00067ca7      0x2b5 src/ASF/thirdparty/wireless/addons/sio2host/uart/sio2host.o
                               0x618b3 (size before relaxing)
- .debug_str     0x00067f5c      0x20f src/main.o
-                              0x6252b (size before relaxing)
+ .debug_str     0x00067f5c      0x25e src/main.o
+                              0x62534 (size before relaxing)
 
 .debug_frame    0x00000000     0x29e4
  .debug_frame   0x00000000      0x198 src/ASF/sam/drivers/tc/tc.o
