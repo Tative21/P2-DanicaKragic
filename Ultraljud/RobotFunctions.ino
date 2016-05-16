@@ -1,4 +1,9 @@
-
+/*
+ * Created 04-20-2016 
+ * By Patricia Jönsson and Hamoud Abdoula
+ * 
+ * 
+ */
 
 /*Calculates the distance in form of cm or inches*/
 long getDistance(long time, int flag)
@@ -30,8 +35,10 @@ void obsticalCheck(long distance){
   /*If an obstical is detected the pin is set high*/
   if(distance > MaxDistance){
     digitalWrite(Forward, LOW);
+    Serial.println("Inget hinder");
   }else{
-    digitalWrite(Forward, HIGH);                      //ADD CODE FOR LEFT AND RIGHT 
+    digitalWrite(Forward, HIGH);
+    Serial.println("HINDER");//ADD CODE FOR LEFT AND RIGHT 
   }
 }
 
