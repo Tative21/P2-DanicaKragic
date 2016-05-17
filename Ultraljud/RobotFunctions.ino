@@ -5,15 +5,17 @@
  * 
  */
 
-/*Calculates the distance in form of cm or inches*/
+/*Calculates the distance in form of cm or inches
+*  Distance_CM  = ((Duration of high level)*(Sonic :340m/s))/2
+*               = ((Duration of high level)*(Sonic :0.034 cm/us))/2
+*               = ((Duration of high level)/(Sonic :29.4 cm/us))/2
+*/
 long getDistance(long time, int flag)
 {
 
   long distance;
   if(flag)
-    distance = time /29 / 2  ;     // Distance_CM  = ((Duration of high level)*(Sonic :340m/s))/2
-                                   //              = ((Duration of high level)*(Sonic :0.034 cm/us))/2
-                                   //              = ((Duration of high level)/(Sonic :29.4 cm/us))/2
+    distance = time /29 / 2  ;    //CM
   else
     distance = time / 74 / 2;      // INC
   return distance;
@@ -31,14 +33,34 @@ long TP_init(int TP, int EP)
   return microseconds;                    // return microseconds
 }
 
-void obsticalCheck(long distance){
+void obsticalCheck(long distance, int flag){
   /*If an obstical is detected the pin is set high*/
-  if(distance > MaxDistance){
-    digitalWrite(Forward, LOW);
-    Serial.println("Inget hinder");
-  }else{
-    digitalWrite(Forward, HIGH);
-    Serial.println("HINDER");//ADD CODE FOR LEFT AND RIGHT 
+  if(flag==FORWARD){
+    if(distance > MaxDistance){
+      digitalWrite(FORWARD, LOW);
+      Serial.println("Inget hinder");
+    }if(distance<MaxDistance){
+      digitalWrite(FORWARD, HIGH);
+      Serial.println("HINDER");//ADD CODE FOR LEFT AND RIGHT 
+    }
+  }
+  if(flag==LEFT){
+    if(distance > MaxDistance){
+      digitalWrite(LEFT, LOW);
+      Serial.println("Inget hinder");
+    }if(distance<MaxDistance){
+      digitalWrite(LEFT, HIGH);
+      Serial.println("HINDER");//ADD CODE FOR LEFT AND RIGHT   
+    }
+  }
+  if(flag==RIGHT){
+    if(distance > MaxDistance){
+      digitalWrite(RIGHT, LOW);
+      Serial.println("Inget hinder");
+    }if(distance<MaxDistance){
+      digitalWrite(RIGHT, HIGH);
+      Serial.println("HINDER");//ADD CODE FOR LEFT AND RIGHT 
+    }
   }
 }
 

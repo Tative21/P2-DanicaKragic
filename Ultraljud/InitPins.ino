@@ -13,12 +13,12 @@ void initPins(){
   pinMode(EP_Right,INPUT);
   pinMode(TP_Left,OUTPUT);
   pinMode(TP_Right,OUTPUT);
-  pinMode(Forward,OUTPUT);
-  pinMode(Left,OUTPUT);           
-  pinMode(Right,OUTPUT);
+  pinMode(FORWARD,OUTPUT);
+  pinMode(LEFT,OUTPUT);           
+  pinMode(RIGHT,OUTPUT);
 
-  digitalWrite(Left, LOW);
-  digitalWrite(Right, LOW);
-  digitalWrite(Forward, LOW);
+  digitalWrite(LEFT, LOW);
+  digitalWrite(RIGHT, LOW);
+  digitalWrite(FORWARD, LOW);
 }
 

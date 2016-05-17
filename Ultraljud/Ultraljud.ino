@@ -11,16 +11,16 @@
 #define CM 1      //Centimeter
 #define INC 0     //Inches
 #define TP_Forward 28      //Trig_pin
-#define EP_Forward 32      //Echo_pin
-#define TP_Left 29
+#define EP_Forward 29      //Echo_pin
+#define TP_Left 30
 #define EP_Left 31
-#define TP_Right 27   
-#define EP_Right  26
+#define TP_Right 32   
+#define EP_Right 33
 
 #define MaxDistance 20  //Max distance in cm
-#define Forward 6     //Detect obstical in front
-#define Left  5       //Detect obstical left
-#define Right 4       //Detect obstical right
+#define FORWARD 3     //Detect obstical in front
+#define LEFT  4       //Detect obstical left
+#define RIGHT 5       //Detect obstical right
 
 
 void setup(){
@@ -32,13 +32,24 @@ void setup(){
   /*Reads distance to detect obstical*/
 void loop(){ 
    
-  long microseconds = TP_init(TP_Forward, EP_Forward);                 //Gets the time needed to calculate the distance  
-  long distance = getDistance(microseconds, CM);                       //Returns the distance in form of cm. For inches change CM to INC
-  //long microseconds = TP_init(TP_Left, EP_Left);
-  //long microseconds = TP_init(TP_Right, EP_Right);
-  Serial.print("Distance = ");
-  Serial.println(distance);
-  obsticalCheck(distance);
+  long microseconds_F = TP_init(TP_Forward, EP_Forward);                 //Gets the time needed to calculate the distance  
+  long distance_F = getDistance(microseconds_F, CM);                       //Returns the distance in form of cm. For inches change CM to INC
+  long microseconds_L = TP_init(TP_Left, EP_Left);
+  //long microseconds_R = TP_init(TP_Right, EP_Right);
+  long distance_L = getDistance(microseconds_L, CM);
+  //long distance_R = getDistance(microseconds_R, CM);
+  
+  obsticalCheck(distance_F, FORWARD);
+ // obsticalCheck(distance_R, RIGHT);
+  obsticalCheck(distance_L, LEFT);
+  
+  
+  Serial.print("Distance Forward = ");
+  Serial.println(distance_F);
+  Serial.print("Distance Left = ");
+  Serial.println(distance_L);
+  //Serial.print("Distance Right = ");
+  //Serial.println(distance_R);
   
 
 }
