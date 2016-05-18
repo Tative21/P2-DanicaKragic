@@ -12,6 +12,8 @@
 #include "adc/adcFunctions.h"
 #include "Tasks/TaskPIDLeft.h"
 #include "Tasks/TaskPIDRight.h"
+#include "init_pins.h"
+#include "Tasks/TaskUltraljud.h"
 
 uint32_t joystick_x;
 uint32_t joystick_y;
@@ -25,6 +27,7 @@ extern float desiredValueRight;
 /**************************************************************************
 * Task for driving left or right.
 **************************************************************************/
+drive;
 void TaskDriveLeftRight(void *p)
 {
 	portTickType xLastWakeTime; //Last time the task was active.
@@ -34,6 +37,9 @@ void TaskDriveLeftRight(void *p)
 
 
 	while(1){
+		if (drive != 1)
+		{ 
+		
 		joystick_x = ReadAnalog0();
 		joystick_y = ReadAnalog1();
 		
@@ -129,7 +135,7 @@ void TaskDriveLeftRight(void *p)
 			SetPointLeftWheel(0.2,driveflag);
 			SetPointRightWheel(0.32,driveflag);	
 		}
-	
+		}
 		xSampleTime = (portTickType)sampleTimeLeft;
 		vTaskDelayUntil(&xLastWakeTime, xSampleTime); //Wait for the next cycle the task will be active.
 	}
