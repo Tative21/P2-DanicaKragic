@@ -8,6 +8,8 @@
 #include <asf.h>
 #include <inttypes.h>
 #include "init_pins.h"
+#include "Tasks/TaskPIDLeft.h"
+#include "Tasks/TaskPIDRight.h"
 
 static uint32_t sampleTimeLeft = 100;
 
@@ -34,17 +36,32 @@ void TaskUltraLjud (void *p)
 		if (getPin(pin3)==HIGH)                //Raktfram ultraljudet
 		{
 			drive=1;
-			setPin(pin11,HIGH);
+			//setPin(pin11,HIGH);
 			
-				if (getPin(pin4)==HIGH)        //vänster ultraljudet      12.5 cm,  45%, 0.3m/s, 0.4 sekunder 
+				if (getPin(pin4)==HIGH && getPin(pin5)==LOW)        //vänster ultraljudet      12.5 cm,  45%, 0.3m/s, 0.4 sekunder 
 				{
-					setPin(pin12,HIGH);
-			}    
-			else if (getPin(pin4)==LOW)
-			{
-				setPin(pin12,LOW);
-			}                         //glöm ej höger ultraljud
+					
+								driveflag = 2;
+								SetPointLeftWheel(0.3,driveflag);  // Svänger åt höger ... 
+								SetPointRightWheel(0,driveflag);
+				}    
+			                       //glöm ej höger ultraljud
+		
+				else if (getPin(pin4)==LOW && getPin(pin5)==HIGH)        //vänster ultraljudet      12.5 cm,  45%, 0.3m/s, 0.4 sekunder
+				{
+					
+					driveflag = 2;
+					SetPointLeftWheel(0,driveflag);                // Svänger åt Vänster ...
+					SetPointRightWheel(0.3,driveflag);
+				}
+				else if (getPin(pin4)==LOW && getPin(pin5)==LOW)        //vänster ultraljudet      12.5 cm,  45%, 0.3m/s, 0.4 sekunder
+				{
 			
+					driveflag = 2;
+				SetPointLeftWheel(0,driveflag);                    // Svänger åt Vänster ...
+				SetPointRightWheel(0.3,driveflag);
+				}
+		
 		}
 		
 		else if (getPin(pin3)==LOW)
