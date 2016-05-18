@@ -1,8 +1,8 @@
 /*
  * TaskCalculateLeftWheel.h
  *
- * Created: 2016-05-04 23:29:50
- *  Author: Martin
+ * 
+ *  Author: Martin and Michael
  */ 
 
 

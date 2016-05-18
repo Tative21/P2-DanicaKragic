@@ -1,7 +1,9 @@
 /*
-* Author: Michael and Martin.
+* TaskTidLeft.c
 *
-* Content: A task containing logic for driving the robot forward or backward.
+* Author: Michael,Martin and Elvin.
+*
+* Content: A task containing logic for PID-regulation for left wheel
 */
 
 #include <asf.h>
@@ -18,7 +20,10 @@
 
 static uint32_t sampleTimeLeft = 50;
 static float filterLeft[POSITIONS] = {0};
+
 float desiredValueLeft = 0;
+uint32_t thedriveflagleft = 0;
+
 static float finalULeft = 0;
 static float errorLeft = 0;
 static float prevErrorLeft = 0;
@@ -32,9 +37,9 @@ static float kdLeft = 0.098497; // 0.1425
 static float samplingTimeLeft = 0.05;
 
 /**************************************************************************
-Task for driving the left wheel forward and backward. The task contains logic 
-for running the wheel with a PID-regulator. It calls on a function containing 
-the actual PID and another function translating actual speed values to PWM 
+Task for driving the left wheel forward and backward. The task contains logic
+for running the wheel with a PID-regulator. It calls on a function containing
+the actual PID and another function translating actual speed values to PWM
 signals.
 **************************************************************************/
 void TaskPIDLeft(void *p)
@@ -54,32 +59,32 @@ void TaskPIDLeft(void *p)
 		
 		int32_t temp;
 		if(desiredValueLeft != 0){
-		filterLeft[POSITIONS-1] = hastighetLeftWheel;
-		
-		
-		for(int i = 0; i<POSITIONS; i++)
-		{
-			averageSensorValue =  (averageSensorValue + filterLeft[i]);
-		}
-		
-		averageSensorValue =  (averageSensorValue / POSITIONS);
-		
-		for(int i = 0; i<POSITIONS-1; i++)
-		{
-			filterLeft[i] = filterLeft[i+1];
-		}
-		
-		filterLeft[POSITIONS-1] = 0;
-		currentVLeft = averageSensorValue;
-		errorLeft =  (float) ((float)desiredValueLeft - (float)(currentVLeft/1000));
-		prevErrorLeft = errorLeft;
-		wLeft = wLeft + errorLeft;
+			filterLeft[POSITIONS-1] = hastighetLeftWheel;
+			
+			
+			for(int i = 0; i<POSITIONS; i++)
+			{
+				averageSensorValue =  (averageSensorValue + filterLeft[i]);
+			}
+			
+			averageSensorValue =  (averageSensorValue / POSITIONS);
+			
+			for(int i = 0; i<POSITIONS-1; i++)
+			{
+				filterLeft[i] = filterLeft[i+1];
+			}
+			
+			filterLeft[POSITIONS-1] = 0;
+			currentVLeft = averageSensorValue;
+			errorLeft =  (float) ((float)desiredValueLeft - (float)(currentVLeft/1000));
+			prevErrorLeft = errorLeft;
+			wLeft = wLeft + errorLeft;
 
-		finalULeft = (float)CalcSignal(samplingTimeLeft, kpLeft, kiLeft, kdLeft, errorLeft, prevErrorLeft, wLeft);
-		temp = finalULeft*1000;
+			finalULeft = (float)CalcSignal(samplingTimeLeft, kpLeft, kiLeft, kdLeft, errorLeft, prevErrorLeft, wLeft);
+			temp = finalULeft*1000;
 
-		
-		
+			
+			
 		}
 		else{
 			finalULeft = 0.0;
@@ -87,11 +92,7 @@ void TaskPIDLeft(void *p)
 			averageSensorValue = 0;
 			currentVLeft = 0;
 		}
-		/*if(temp<0){
-			finalULeft = 0;
-		}else if(temp > 300 ){
-			finalULeft = 1;
-		}*/
+
 		valuesforPWM(finalULeft);
 		//SendControlSignalLeftPID(temp, desiredValueLeft,errorLeft,averageSensorValue);
 		
@@ -99,7 +100,7 @@ void TaskPIDLeft(void *p)
 }
 
 /**************************************************************************
-The PID-regulator.
+* The PID-regulator.
 **************************************************************************/
 float CalcSignal(float sampTime, float k_p, float k_i, float k_d, float currErr, float prevErr, int32_t sumErr)
 {
@@ -117,48 +118,58 @@ float CalcSignal(float sampTime, float k_p, float k_i, float k_d, float currErr,
 }
 
 /**************************************************************************
-Function for translating actual speed values to PWM signals. 
+* Function for translating actual speed values to PWM signals.
 **************************************************************************/
 void valuesforPWM(float finalULeft){
 	
-	if(finalULeft <= 0.016){
-		LeftWheelPWM(1500);
-	}
-	else if(finalULeft >= 0.017 && finalULeft <= 0.026){
-		LeftWheelPWM(1390);
-	}
-	else if(finalULeft >= 0.026 && finalULeft <= 0.033){
-		LeftWheelPWM(1370);
-	}
-	else if(finalULeft >= 0.034 && finalULeft <= 0.077){
-		LeftWheelPWM(1350);
-	}
-	else if(finalULeft >= 0.078 && finalULeft <= 0.101){
-		LeftWheelPWM(1330);
-	}
-	else if(finalULeft >= 0.102 && finalULeft <= 0.149){
-		LeftWheelPWM(1310);
-	}
-	else if(finalULeft >= 0.150 && finalULeft <= 0.194){
-		LeftWheelPWM(1290);
-	}
-	else if(finalULeft >= 0.195 && finalULeft <= 0.212){
-		LeftWheelPWM(1270);
-	}
-	else if(finalULeft >= 0.213 && finalULeft <= 0.250){
-		LeftWheelPWM(1250);
-	}
-	else if(finalULeft >= 0.251 && finalULeft <= 0.315){
-		LeftWheelPWM(1230);
-	}
-	else if(finalULeft >= 0.316 && finalULeft <= 0.379){
-		LeftWheelPWM(1210);
-	}
-	else if(finalULeft > 0.38){
-		LeftWheelPWM(1200);
+	if(thedriveflagleft == 0){
+		if(finalULeft <= 0.016){
+			LeftWheelPWM(1500);
+		}
+		else if(finalULeft >= 0.017 && finalULeft <= 0.026){
+			LeftWheelPWM(1390);
+		}
+		else if(finalULeft >= 0.026 && finalULeft <= 0.033){
+			LeftWheelPWM(1370);
+		}
+		else if(finalULeft >= 0.034 && finalULeft <= 0.077){
+			LeftWheelPWM(1350);
+		}
+		else if(finalULeft >= 0.078 && finalULeft <= 0.101){
+			LeftWheelPWM(1330);
+		}
+		else if(finalULeft >= 0.102 && finalULeft <= 0.149){
+			LeftWheelPWM(1310);
+		}
+		else if(finalULeft >= 0.150 && finalULeft <= 0.194){
+			LeftWheelPWM(1290);
+		}
+		else if(finalULeft >= 0.195 && finalULeft <= 0.212){
+			LeftWheelPWM(1270);
+		}
+		else if(finalULeft >= 0.213 && finalULeft <= 0.250){
+			LeftWheelPWM(1250);
+		}
+		else if(finalULeft >= 0.251 && finalULeft <= 0.315){
+			LeftWheelPWM(1230);
+		}
+		else if(finalULeft >= 0.316 && finalULeft <= 0.379){
+			LeftWheelPWM(1210);
+		}
+		else if(finalULeft > 0.38){
+			LeftWheelPWM(1200);
+		}
+	} else if(thedriveflagleft == 1)
+	{
+		LeftWheelPWM(1700);
 	}
 }
 
-void SetPointLeftWheel(float setPoint){
+/*
+* Sets value for drive forward and backwards and the setpoint for PID-regulator
+*/
+void SetPointLeftWheel(float setPoint,uint32_t drive){
 	desiredValueLeft = setPoint;
+	thedriveflagleft = drive;
+	
 }

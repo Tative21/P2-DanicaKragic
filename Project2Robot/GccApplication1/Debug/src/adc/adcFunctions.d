@@ -148,8 +148,13 @@ src/adc/adcFunctions.d src/adc/adcFunctions.o: ../src/adc/adcFunctions.c \
  ../src/ASF/sam/drivers/uart/uart.h ../src/ASF/sam/drivers/usart/usart.h \
  ../src/config/conf_uart_serial.h ../src/ASF/sam/drivers/tc/tc.h \
  ../src/ASF/sam/drivers/pio/pio_handler.h \
+<<<<<<< HEAD
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1437\arm-gnu-toolchain\arm-none-eabi\include\inttypes.h \
  ../src/SerialUART.h ../src/adc/adcFunctions.h \
+=======
+ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\inttypes.h \
+ ../src/SerialUARTFunctions/SerialUART.h ../src/adc/adcFunctions.h \
+>>>>>>> refs/remotes/origin/master
  ../src/Tasks/TaskDriveLeftRight.h ../src/Tasks/TaskPIDLeft.h \
  ../src/DelayFunctions/DelayFunctions.h ../src/config/conf_board.h \
  ../src/Interrupts/InterruptPioLeftWheel.h
@@ -468,7 +473,7 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1437\arm-gnu
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1437\arm-gnu-toolchain\arm-none-eabi\include\inttypes.h:
 
-../src/SerialUART.h:
+../src/SerialUARTFunctions/SerialUART.h:
 
 ../src/adc/adcFunctions.h:
 

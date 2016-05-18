@@ -1,6 +1,10 @@
 /*
 * SerialUART.c
 *
+* Author: Martin och Michael. Comments written by Michael.
+*
+* Content: Methods for configuring serial uart and various
+* functions for using it.
 */
 #include <asf.h>
 #include "SerialUART.h"

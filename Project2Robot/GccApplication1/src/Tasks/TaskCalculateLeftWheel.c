@@ -1,8 +1,9 @@
 /*
  * TaskCalculateLeftWheel.c
  *
- * Created: 2016-05-04 23:28:56
- *  Author: Martin och Martin
+ * Author: Martin and Michael
+ *
+ * Content: Calculate the velocity for left wheel.
  */ 
 #include <asf.h>
 #include <inttypes.h>
@@ -18,9 +19,12 @@ float sekLeftWheel;
 extern hastighetLeftWheel;
 float omkretsHjul = 0.45;
 float distanceLeftWheel = 0.0;
-uint32_t hzforcpu  = 2625000; // . ÄNDRA HÄR OM VI ANVÄNDER "TC_CMR_TCCLKS_TIMER_CLOCK3" I INTERRUPTPIO.C
-static uint32_t sampleTimeLeft = 6; //GLÖM INTE ATT DEN ÄR KORT. RÄKNA INTE UTANFÖR TASKEN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+uint32_t hzforcpu  = 2625000; 
+static uint32_t sampleTimeLeft = 6; 
 
+/**********************************************
+* Calculate the velocity for left wheel.
+***********************************************/
 void TaskCalculateLeftWheel(void *p)
 {
 

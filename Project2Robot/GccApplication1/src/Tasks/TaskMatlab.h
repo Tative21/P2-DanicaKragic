@@ -1,8 +1,7 @@
 /*
  * TaskMatlab.h
  *
- * Created: 2016-05-17 12:26:40
- *  Author: Spellabbet
+ *  Author: Martin and Michael
  */ 
 
 

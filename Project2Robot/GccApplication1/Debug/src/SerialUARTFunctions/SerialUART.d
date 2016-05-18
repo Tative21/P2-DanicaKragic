@@ -1,4 +1,5 @@
-src/SerialUART.d src/SerialUART.o: ../src/SerialUART.c ../src/asf.h \
+src/SerialUARTFunctions/SerialUART.d src/SerialUARTFunctions/SerialUART.o: \
+ ../src/SerialUARTFunctions/SerialUART.c ../src/asf.h \
  ../src/ASF/sam/drivers/adc/adc.h ../src/ASF/sam/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1437\arm-gnu-toolchain\lib\gcc\arm-none-eabi\4.8.4\include\stddef.h \
  ../src/ASF/common/utils/parts.h \
@@ -146,7 +147,8 @@ src/SerialUART.d src/SerialUART.o: ../src/SerialUART.c ../src/asf.h \
  ../src/ASF/common/services/serial/sam_uart/uart_serial.h \
  ../src/ASF/sam/drivers/uart/uart.h ../src/ASF/sam/drivers/usart/usart.h \
  ../src/config/conf_uart_serial.h ../src/ASF/sam/drivers/tc/tc.h \
- ../src/ASF/sam/drivers/pio/pio_handler.h ../src/SerialUART.h
+ ../src/ASF/sam/drivers/pio/pio_handler.h \
+ ../src/SerialUARTFunctions/SerialUART.h
 
 ../src/asf.h:
 
@@ -460,4 +462,4 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1437\arm-gnu
 
 ../src/ASF/sam/drivers/pio/pio_handler.h:
 
-../src/SerialUART.h:
+../src/SerialUARTFunctions/SerialUART.h:

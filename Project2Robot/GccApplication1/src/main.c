@@ -1,44 +1,14 @@
-/**
- * \file
- *
- * \brief Empty user application template
- *
- */
-
-/**
- * \mainpage User Application template doxygen documentation
- *
- * \par Empty user application template
- *
- * Bare minimum empty user application template
- *
- * \par Content
- *
- * -# Include the ASF header files (through asf.h)
- * -# "Insert system clock initialization code here" comment
- * -# Minimal main function that starts with a call to board_init()
- * -# "Insert application code here" comment
- *
- */
-
 /*
- * Include header files for all drivers that have been imported from
- * Atmel Software Framework (ASF).
- */
- /**
- * Support and FAQ: visit <a href="http://www.atmel.com/design-support/">Atmel Support</a>
- 
- 
- 
- 
- Authors: Michael och Martin
- 
- */
+*
+*
+* Authors: Michael och Martin
+* 
+*/
  
 #include <asf.h>
 #include <inttypes.h>
 #include "stdio/stdio_serial/stdio_serial.h"
-#include "SerialUART.h"
+#include "SerialUARTFunctions/SerialUART.h"
 #include "adc/adcFunctions.h"
 #include "Tasks/TaskCalculateLeftWheel.h"
 #include "Tasks/TaskDriveLeftRight.h"
@@ -88,7 +58,23 @@ int main (void)
 
 
 //Ultraljud
+<<<<<<< HEAD
 
+=======
+	/*
+	ioport_set_pin_dir(PIO_PD9_IDX,Output);
+	ioport_set_pin_dir(PIO_PC4_IDX,Input);
+			while(1){
+			printf("%d",ioport_get_pin_level(PIO_PC4_IDX));
+			if(ioport_get_pin_level(PIO_PC4_IDX)){
+				ioport_set_pin_level(PIO_PD9_IDX,HIGH);
+				}else{
+				ioport_set_pin_level(PIO_PD9_IDX,LOW);
+			}
+			}
+	
+	*/
+>>>>>>> refs/remotes/origin/master
 
 	if (xTaskCreate(TaskDriveLeftRight, (const signed char * const) "TaskDriveLeftRight", 1024, NULL, 3, NULL) != pdPASS){
 		printf("Failed to create TaskDriveLeftRight\n");
