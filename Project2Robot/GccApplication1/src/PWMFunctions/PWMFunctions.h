@@ -1,4 +1,10 @@
+ /*
+ * PWMFunctions.h
+ *
+ * Author: Martin och Michael. 
+ */
 #ifndef PWMFUNCTION_H_
+
 #define PWMFUNCTION_H_
 
 void PWMInit(void);

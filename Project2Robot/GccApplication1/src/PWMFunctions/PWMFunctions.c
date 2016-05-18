@@ -16,7 +16,8 @@ pwm_channel_t PWMPin38;
 /************************************************************************
 * Configuration of the Pulse Width Modulation (PWM). 
 /************************************************************************/
-void PWMInit(void){
+void PWMInit(void)
+{
 	pmc_enable_periph_clk(ID_PWM);
 	pwm_channel_disable(PWM, PWM_CHANNEL_3);
 	pwm_channel_disable(PWM, PWM_CHANNEL_2);
@@ -49,27 +50,30 @@ void InitPIN40(void)
 /************************************************************************
 * Initiation of digital pin 38 on the Arduino Due board.
 /************************************************************************/
-void InitPIN38(void){
-		PWMPin38.channel = PWM_CHANNEL_2;
-		PWMPin38.ul_prescaler = PWM_CMR_CPRE_CLKA;
-		PWMPin38.ul_duty = 0;
-		PWMPin38.ul_period = 19999;
-		pwm_channel_init(PWM, &PWMPin38);
-		pio_set_peripheral(PIOC, PIO_PERIPH_B, PIO_PC6B_PWML2);
-		pwm_channel_enable(PWM, PWM_CHANNEL_2);
+void InitPIN38(void)
+{
+	PWMPin38.channel = PWM_CHANNEL_2;
+	PWMPin38.ul_prescaler = PWM_CMR_CPRE_CLKA;
+	PWMPin38.ul_duty = 0;
+	PWMPin38.ul_period = 19999;
+	pwm_channel_init(PWM, &PWMPin38);
+	pio_set_peripheral(PIOC, PIO_PERIPH_B, PIO_PC6B_PWML2);
+	pwm_channel_enable(PWM, PWM_CHANNEL_2);
 }
 
 
 /************************************************************************
-* Calculation of the output value. 
+* Function for setting a PWM value to the left engine. 
 /************************************************************************/
 void LeftWheelPWM(uint32_t dutyCycle)
 {
-
-		pwm_channel_update_duty(PWM, &PWMPin40, dutyCycle);
-
+	pwm_channel_update_duty(PWM, &PWMPin40, dutyCycle);
 }
 
-void RightWheelPWM(uint32_t dutyCycle){
+/************************************************************************
+* Function for setting a PWM value to the right engine.
+/************************************************************************/
+void RightWheelPWM(uint32_t dutyCycle)
+{
 	pwm_channel_update_duty(PWM, &PWMPin38, dutyCycle);
 }

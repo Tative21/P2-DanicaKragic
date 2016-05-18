@@ -1,8 +1,9 @@
 /*
  * TaskPIDRight.c
  *
- * Created: 2016-05-12 17:03:48
- *  Author: Spellabbet
+ *  Author: Martin, Michael and Elvin 
+ *
+ * Content:  A task containing logic for PID-regulation for right wheel
  */ 
 
 #include <asf.h>
@@ -32,7 +33,12 @@ static float kdRight = -0.026602;	// 0.1425
 static float samplingTimeRight = 0.05;
 
 
-
+/**************************************************************************
+Task for driving the right wheel forward and backward. The task contains logic
+for running the wheel with a PID-regulator. It calls on a function containing
+the actual PID and another function translating actual speed values to PWM
+signals.
+**************************************************************************/
 void TaskPIDRight(void *p)
 {
 	
@@ -63,7 +69,7 @@ void TaskPIDRight(void *p)
 			{
 				filterRight[i] = filterRight[i+1];
 			}
-			//printf("%d\n", hastighetRightWheel);
+
 			filterRight[POSITIONS-1] = 0;
 			currentVRight = averageSensorValue;
 			errorRight =  (float) ((float)desiredValueRight - (float)currentVRight/1000);
@@ -87,6 +93,9 @@ void TaskPIDRight(void *p)
 	}
 }
 
+/**************************************************************************
+The PID-regulator.
+**************************************************************************/
 float CalcSignalRight(float sampTime, float k_p, float k_i, float k_d, float currErr, float prevErr, int32_t sumErr)
 {
 	float proportionalPart;
@@ -102,6 +111,10 @@ float CalcSignalRight(float sampTime, float k_p, float k_i, float k_d, float cur
 	return signal;
 }
 
+
+/*********************************************
+Function for translating actual speed values to PWM signals.
+***********************************************/
 void valuesforPWMRight(float finalULeft){
 	
 	if(finalULeft <= 0.017){

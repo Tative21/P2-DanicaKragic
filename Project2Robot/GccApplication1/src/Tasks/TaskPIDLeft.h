@@ -1,8 +1,7 @@
 /*
  * JoystickOptionsYAxis.h
  *
- * Created: 2016-04-18 15:01:42
- *  Author: Spellabbet
+ *  Author: Martin  and Michael
  */ 
 
 

@@ -503,6 +503,12 @@
     <Compile Include="src\PWMFunctions\PWMFunctions.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\SerialUARTFunctions\SerialUART.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\SerialUARTFunctions\SerialUART.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\Tasks\TaskCalculateRightWheel.h">
       <SubType>compile</SubType>
     </Compile>
@@ -555,12 +561,6 @@
       <SubType>compile</SubType>
     </None>
     <Compile Include="src\config\FreeRTOSConfig.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\SerialUART.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\SerialUART.h">
       <SubType>compile</SubType>
     </Compile>
     <None Include="src\ASF\common\services\clock\genclk.h">
@@ -1180,6 +1180,7 @@
     <Folder Include="src\adc" />
     <Folder Include="src\DelayFunctions" />
     <Folder Include="src\Interrupts\" />
+    <Folder Include="src\SerialUARTFunctions" />
     <Folder Include="src\PWMFunctions" />
     <Folder Include="src\Tasks" />
   </ItemGroup>

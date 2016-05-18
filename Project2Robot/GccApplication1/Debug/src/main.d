@@ -149,7 +149,7 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../src/ASF/sam/drivers/pio/pio_handler.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\inttypes.h \
  ../src/ASF/common/utils/stdio/stdio_serial/stdio_serial.h \
- ../src/SerialUART.h ../src/adc/adcFunctions.h \
+ ../src/SerialUARTFunctions/SerialUART.h ../src/adc/adcFunctions.h \
  ../src/Tasks/TaskCalculateLeftWheel.h ../src/Tasks/TaskDriveLeftRight.h \
  ../src/Tasks/TaskPIDLeft.h ../src/Tasks/TaskCalculateRightWheel.h \
  ../src/Tasks/TaskMatlab.h ../src/DelayFunctions/DelayFunctions.h \
@@ -473,7 +473,7 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 
 ../src/ASF/common/utils/stdio/stdio_serial/stdio_serial.h:
 
-../src/SerialUART.h:
+../src/SerialUARTFunctions/SerialUART.h:
 
 ../src/adc/adcFunctions.h:
 

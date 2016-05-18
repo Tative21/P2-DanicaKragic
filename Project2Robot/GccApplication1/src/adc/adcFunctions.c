@@ -10,7 +10,7 @@
 #include <asf.h>
 #include <inttypes.h>
 #include <stdio_serial.h>
-#include "SerialUART.h"
+#include "SerialUARTFunctions/SerialUART.h"
 #include "adc/adcFunctions.h"
 #include "Tasks/TaskDriveLeftRight.h"
 #include "Tasks/TaskPIDLeft.h"

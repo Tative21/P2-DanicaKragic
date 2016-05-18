@@ -10,6 +10,8 @@ src\Interrupts\InterruptPioRightWheel.c
 
 src\PWMFunctions\PWMFunctions.c
 
+src\SerialUARTFunctions\SerialUART.c
+
 src\Tasks\TaskMatlab.c
 
 src\Tasks\TaskPIDRight.c
@@ -25,8 +27,6 @@ src\Tasks\TaskCalculateRightWheel.c
 src\Tasks\TaskDriveLeftRight.c
 
 src\Tasks\TaskPIDLeft.c
-
-src\SerialUART.c
 
 src\adc\adcFunctions.c
 

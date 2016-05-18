@@ -1,7 +1,9 @@
 /*
-* Author: Michael and Martin.
+* TaskTidLeft.c
 *
-* Content: A task containing logic for driving the robot forward or backward.
+* Author: Michael,Martin and Elvin.
+*
+* Content: A task containing logic for PID-regulation for left wheel
 */
 
 #include <asf.h>
@@ -87,11 +89,7 @@ void TaskPIDLeft(void *p)
 			averageSensorValue = 0;
 			currentVLeft = 0;
 		}
-		/*if(temp<0){
-			finalULeft = 0;
-		}else if(temp > 300 ){
-			finalULeft = 1;
-		}*/
+
 		valuesforPWM(finalULeft);
 		//SendControlSignalLeftPID(temp, desiredValueLeft,errorLeft,averageSensorValue);
 		

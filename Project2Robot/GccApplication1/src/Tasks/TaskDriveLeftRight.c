@@ -2,9 +2,9 @@
 * JoystickOptions.c
 *
 * Created: 2016-04-18 14:17:37
-* Author: William och Elvin joysticklogiken. Michael och Martin skapade task, testade den och placera logiken i den.
+* Author: William and Elvin joysticklogic. Michael and Martin created the task.
 *
-* A task containing logic for turning the robot left or right.
+* Content: A task containing logic for turning the robot left or right.
 */
 
 #include <asf.h>

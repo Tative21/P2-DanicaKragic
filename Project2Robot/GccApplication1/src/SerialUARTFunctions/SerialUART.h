@@ -1,5 +1,7 @@
 /*
 * SerialUART.h
+*
+* Author: Martin och Michael.  
 */
 
 #ifndef SerialUART_H_
