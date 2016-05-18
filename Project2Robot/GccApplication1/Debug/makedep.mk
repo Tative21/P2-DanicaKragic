@@ -14,6 +14,8 @@ src\Tasks\TaskMatlab.c
 
 src\Tasks\TaskPIDRight.c
 
+src\Tasks\TaskUltraljud.c
+
 src\ASF\sam\drivers\tc\tc.c
 
 src\DelayFunctions\DelayFunctions.c
