@@ -57,7 +57,7 @@ void TaskPIDLeft(void *p)
 		xSampleTime = (portTickType)sampleTimeLeft;
 		vTaskDelayUntil(&xLastWakeTime, xSampleTime); //Wait for the next cycle the task will be active.
 		
-		int32_t temp;
+		uint32_t temp;
 		if(desiredValueLeft != 0){
 			filterLeft[POSITIONS-1] = hastighetLeftWheel;
 			
@@ -82,15 +82,13 @@ void TaskPIDLeft(void *p)
 
 			finalULeft = (float)CalcSignal(samplingTimeLeft, kpLeft, kiLeft, kdLeft, errorLeft, prevErrorLeft, wLeft);
 			temp = finalULeft*1000;
-
-			
-			
 		}
 		else{
 			finalULeft = 0.0;
 			temp = 0;
 			averageSensorValue = 0;
 			currentVLeft = 0;
+			valuesforPWM(1500);
 		}
 
 		valuesforPWM(finalULeft);
@@ -126,40 +124,43 @@ void valuesforPWM(float finalULeft){
 		if(finalULeft <= 0.016){
 			LeftWheelPWM(1500);
 		}
-		else if(finalULeft >= 0.017 && finalULeft <= 0.026){
-			LeftWheelPWM(1390);
-		}
-		else if(finalULeft >= 0.026 && finalULeft <= 0.033){
-			LeftWheelPWM(1370);
-		}
-		else if(finalULeft >= 0.034 && finalULeft <= 0.077){
-			LeftWheelPWM(1350);
-		}
-		else if(finalULeft >= 0.078 && finalULeft <= 0.101){
-			LeftWheelPWM(1330);
-		}
-		else if(finalULeft >= 0.102 && finalULeft <= 0.149){
-			LeftWheelPWM(1310);
-		}
-		else if(finalULeft >= 0.150 && finalULeft <= 0.194){
-			LeftWheelPWM(1290);
-		}
-		else if(finalULeft >= 0.195 && finalULeft <= 0.212){
-			LeftWheelPWM(1270);
-		}
-		else if(finalULeft >= 0.213 && finalULeft <= 0.250){
-			LeftWheelPWM(1250);
-		}
-		else if(finalULeft >= 0.251 && finalULeft <= 0.315){
-			LeftWheelPWM(1230);
-		}
-		else if(finalULeft >= 0.316 && finalULeft <= 0.379){
-			LeftWheelPWM(1210);
-		}
-		else if(finalULeft > 0.38){
-			LeftWheelPWM(1200);
-		}
-	} else if(thedriveflagleft == 1)
+	}
+	if(thedriveflagleft == 2){
+			if(finalULeft >= 0.017 && finalULeft <= 0.026){
+				LeftWheelPWM(1390);
+			}
+			else if(finalULeft >= 0.026 && finalULeft <= 0.033){
+				LeftWheelPWM(1370);
+			}
+			else if(finalULeft >= 0.034 && finalULeft <= 0.077){
+				LeftWheelPWM(1350);
+			}
+			else if(finalULeft >= 0.078 && finalULeft <= 0.101){
+				LeftWheelPWM(1330);
+			}
+			else if(finalULeft >= 0.102 && finalULeft <= 0.149){
+				LeftWheelPWM(1310);
+			}
+			else if(finalULeft >= 0.150 && finalULeft <= 0.194){
+				LeftWheelPWM(1290);
+			}
+			else if(finalULeft >= 0.195 && finalULeft <= 0.212){
+				LeftWheelPWM(1270);
+			}
+			else if(finalULeft >= 0.213 && finalULeft <= 0.250){
+				LeftWheelPWM(1250);
+			}
+			else if(finalULeft >= 0.251 && finalULeft <= 0.315){
+				LeftWheelPWM(1230);
+			}
+			else if(finalULeft >= 0.316 && finalULeft <= 0.379){
+				LeftWheelPWM(1210);
+			}
+			else if(finalULeft > 0.38){
+				LeftWheelPWM(1200);
+			}
+	}
+	if(thedriveflagleft == 1)
 	{
 		LeftWheelPWM(1700);
 	}

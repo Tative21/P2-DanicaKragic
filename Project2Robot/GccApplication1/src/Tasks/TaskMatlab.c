@@ -31,10 +31,10 @@ void TaskMatLab(void *p)
 		xSampleTime = (portTickType)sampleTimeLeft;
 		vTaskDelayUntil(&xLastWakeTime, xSampleTime);
 		
-		printf("%d\n",sendmatlab);
+		/*printf("%d\n",sendmatlab);
 		printf("%d\n",bv);
 		printf("%d\n",errortomat);
-		printf("%d\n",averagehastighet);
+		printf("%d\n",averagehastighet);*/
 	
 	}
 }
