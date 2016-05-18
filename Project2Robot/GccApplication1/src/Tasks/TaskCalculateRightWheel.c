@@ -44,7 +44,6 @@ void TaskCalculateRightWheel(void *p)
 
 		if((distanceRightWheel > 0) && (sekRightWheel > 0)){
 			hastighetRightWheel = (((float)((float)distanceRightWheel/(float)sekRightWheel)*1000));
-		}		
-		printf("%d\n", counterRightWheel);	
+		}			
 	}
 }
