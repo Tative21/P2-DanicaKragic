@@ -1,10 +1,10 @@
 /*
- * TaskPIDRight.c
- *
- *  Author: Martin, Michael and Elvin 
- *
- * Content:  A task containing logic for PID-regulation for right wheel
- */ 
+* TaskPIDRight.c
+*
+*  Author: Martin, Michael and Elvin
+*
+* Content:  A task containing logic for PID-regulation for right wheel
+*/
 
 #include <asf.h>
 #include <inttypes.h>
@@ -19,7 +19,11 @@
 
 static uint32_t sampleTimeRight = 50;
 static float filterRight[POSITIONS] = {0};
+
 float desiredValueRight = 0;
+uint32_t theflagdriveright = 0;
+
+
 static float finalURight = 0;
 float errorRight = 0;
 static float prevErrorRight = 0;
@@ -56,7 +60,7 @@ void TaskPIDRight(void *p)
 		
 		if(desiredValueRight != 0){
 			filterRight[POSITIONS-1] = hastighetRightWheel;
-					
+			
 			
 			for(int i = 0; i<POSITIONS; i++)
 			{
@@ -77,7 +81,7 @@ void TaskPIDRight(void *p)
 			prevErrorRight = errorRight;
 			wRight = wRight + errorRight;
 
-			finalURight = (float)CalcSignalRight(samplingTimeRight, kpRight, kiRight, kdRight, errorRight, prevErrorRight, wRight);					
+			finalURight = (float)CalcSignalRight(samplingTimeRight, kpRight, kiRight, kdRight, errorRight, prevErrorRight, wRight);
 			temp = finalURight*1000;
 		}
 		else{
@@ -117,44 +121,52 @@ Function for translating actual speed values to PWM signals.
 ***********************************************/
 void valuesforPWMRight(float finalULeft){
 	
-	if(finalULeft <= 0.017){
-		RightWheelPWM(1500);
-	}
-	else if(finalULeft >= 0.018 && finalULeft <= 0.029){
-		RightWheelPWM(1390);
-	}
-	else if(finalULeft >= 0.03 && finalULeft <= 0.055){
-		RightWheelPWM(1370);
-	}
-	else if(finalULeft >= 0.056 && finalULeft <= 0.085){
-		RightWheelPWM(1350);
-	}
-	else if(finalULeft >= 0.086 && finalULeft <= 0.128){
-		RightWheelPWM(1330);
-	}
-	else if(finalULeft >= 0.129 && finalULeft <= 0.155){
-		RightWheelPWM(1310);
-	}
-	else if(finalULeft >= 0.156 && finalULeft <= 0.182){
-		RightWheelPWM(1290);
-	}
-	else if(finalULeft >= 0.183 && finalULeft <= 0.220){
-		RightWheelPWM(1270);
-	}
-	else if(finalULeft >= 0.221 && finalULeft <= 0.267){
-		RightWheelPWM(1250);
-	}
-	else if(finalULeft >= 0.268 && finalULeft <= 0.334){
-		RightWheelPWM(1230);
-	}
-	else if(finalULeft >= 0.335 && finalULeft <= 0.372){
-		RightWheelPWM(1210);
-	}
-	else if(finalULeft > 0.372){
-	RightWheelPWM(1200);
+	if(theflagdriveright == 0){
+		if(finalULeft <= 0.017){
+			RightWheelPWM(1500);
+		}
+		else if(finalULeft >= 0.018 && finalULeft <= 0.029){
+			RightWheelPWM(1390);
+		}
+		else if(finalULeft >= 0.03 && finalULeft <= 0.055){
+			RightWheelPWM(1370);
+		}
+		else if(finalULeft >= 0.056 && finalULeft <= 0.085){
+			RightWheelPWM(1350);
+		}
+		else if(finalULeft >= 0.086 && finalULeft <= 0.128){
+			RightWheelPWM(1330);
+		}
+		else if(finalULeft >= 0.129 && finalULeft <= 0.155){
+			RightWheelPWM(1310);
+		}
+		else if(finalULeft >= 0.156 && finalULeft <= 0.182){
+			RightWheelPWM(1290);
+		}
+		else if(finalULeft >= 0.183 && finalULeft <= 0.220){
+			RightWheelPWM(1270);
+		}
+		else if(finalULeft >= 0.221 && finalULeft <= 0.267){
+			RightWheelPWM(1250);
+		}
+		else if(finalULeft >= 0.268 && finalULeft <= 0.334){
+			RightWheelPWM(1230);
+		}
+		else if(finalULeft >= 0.335 && finalULeft <= 0.372){
+			RightWheelPWM(1210);
+		}
+		else if(finalULeft > 0.372){
+			RightWheelPWM(1200);
+		}
+	}else if(theflagdriveright == 1){
+		RightWheelPWM(1700);
 	}
 }
 
-void SetPointRightWheel(float setPoint){
+/*
+* Sets value for drive forward and backwards and the setpoint for PID-regulator
+*/
+void SetPointRightWheel(float setPoint,uint32_t drive){
 	desiredValueRight = setPoint;
+	theflagdriveright = drive;
 }
