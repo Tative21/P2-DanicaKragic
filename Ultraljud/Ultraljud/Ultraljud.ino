@@ -17,7 +17,7 @@
 #define TP_Right 32   
 #define EP_Right 33
 
-#define MaxDistance 20  //Max distance in cm
+#define MaxDistance 35  //Max distance in cm
 #define FORWARD 3       //Detect obstical in front
 #define LEFT  4         //Detect obstical left
 #define RIGHT 5         //Detect obstical right
@@ -30,15 +30,15 @@ void setup(){
 
 void loop(){  
   long microseconds_F = TP_init(TP_Forward, EP_Forward);    //Gets the time needed to calculate the distance  
-  long distance_F = getDistance(microseconds_F, CM);        //Returns the distance in form of cm. For inches change CM to INC
+  long microseconds_R = TP_init(TP_Right, EP_Right);       
   long microseconds_L = TP_init(TP_Left, EP_Left);
-  //long microseconds_R = TP_init(TP_Right, EP_Right);
+  long distance_F = getDistance(microseconds_F, CM);        //Returns the distance in form of cm. For inches change CM to INC
   long distance_L = getDistance(microseconds_L, CM);
-  //long distance_R = getDistance(microseconds_R, CM);
+  long distance_R = getDistance(microseconds_R, CM);
   
-  obsticalCheckForward(distance_F, FORWARD);
- // obsticalCheck(distance_R, RIGHT);
-  obsticalCheckLeft(distance_L, LEFT);
+  obsticalCheck(distance_F, FORWARD);
+  obsticalCheck(distance_R, RIGHT);
+  obsticalCheck(distance_L, LEFT);
   
  /* 
   Serial.print("Distance Forward = ");
