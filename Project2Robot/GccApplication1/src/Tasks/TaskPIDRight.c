@@ -32,8 +32,8 @@ float currentVRight = 0;
 uint32_t hastighetRightWheel;
 
 static float kpRight = 1.366;		// 0.5
-static float kiRight = 3.703;	// 0.57
-static float kdRight = -0.026602;	// 0.1425
+static float kiRight = 2.703;	// 0.57
+static float kdRight = 0.026602;	// 0.1425
 static float samplingTimeRight = 0.05;
 
 
@@ -56,7 +56,7 @@ void TaskPIDRight(void *p)
 		xSampleTime = (portTickType)sampleTimeRight;
 		vTaskDelayUntil(&xLastWakeTime, xSampleTime); //Wait for the next cycle the task will be active.
 		
-		int32_t temp;
+		uint32_t temp;
 		
 		if(desiredValueRight != 0){
 			filterRight[POSITIONS-1] = hastighetRightWheel;
@@ -88,9 +88,10 @@ void TaskPIDRight(void *p)
 			finalURight = 0.0;
 			averageSensorValue = 0;
 			temp = 0;
-			
+			currentVRight = 0;
+			valuesforPWMRight(1500);
 		}
-		//printf("%d\n",temp);
+		
 		valuesforPWMRight(finalURight);
 		SendControlSignalLeftPID(temp, desiredValueRight,errorRight,averageSensorValue);
 		
@@ -111,7 +112,7 @@ float CalcSignalRight(float sampTime, float k_p, float k_i, float k_d, float cur
 	integralPart = (float)(sumErr * (sampTime/k_i));
 	derivingPart = ((float)currErr - (float)prevErr) * (float)(k_d / sampTime);
 	signal = (float)k_p * ((float)(proportionalPart + integralPart + derivingPart));
-	
+
 	return signal;
 }
 
@@ -125,7 +126,9 @@ void valuesforPWMRight(float finalULeft){
 		if(finalULeft <= 0.017){
 			RightWheelPWM(1500);
 		}
-		else if(finalULeft >= 0.018 && finalULeft <= 0.029){
+	}
+	if(theflagdriveright == 2){
+		if(finalULeft >= 0.018 && finalULeft <= 0.029){
 			RightWheelPWM(1390);
 		}
 		else if(finalULeft >= 0.03 && finalULeft <= 0.055){
@@ -158,7 +161,9 @@ void valuesforPWMRight(float finalULeft){
 		else if(finalULeft > 0.372){
 			RightWheelPWM(1200);
 		}
-	}else if(theflagdriveright == 1){
+		
+		}
+		if(theflagdriveright == 1){
 		RightWheelPWM(1700);
 	}
 }

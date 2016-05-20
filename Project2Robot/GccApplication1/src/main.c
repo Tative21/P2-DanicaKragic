@@ -21,6 +21,9 @@
 #include "Interrupts/InterruptPioRightWheel.h"
 #include "Tasks/TaskPIDRight.h"
 #include "PWMFunctions/PWMFunctions.h"
+#include "Tasks/TaskUltraljud.h"
+#include "init_pins.h"
+
 
 int configureConsole(void)
 /* Enables feedback through the USB-cable back to terminal within Atmel Studio */
@@ -55,6 +58,9 @@ int main (void)
 
 
 //Ultraljud
+<<<<<<< HEAD
+
+=======
 	/*
 	ioport_set_pin_dir(PIO_PD9_IDX,Output);
 	ioport_set_pin_dir(PIO_PC4_IDX,Input);
@@ -68,6 +74,7 @@ int main (void)
 			}
 	
 	*/
+>>>>>>> refs/remotes/origin/master
 
 	if (xTaskCreate(TaskDriveLeftRight, (const signed char * const) "TaskDriveLeftRight", 1024, NULL, 3, NULL) != pdPASS){
 		printf("Failed to create TaskDriveLeftRight\n");
@@ -87,7 +94,10 @@ int main (void)
 	if (xTaskCreate(TaskCalculateRightWheel, (const signed char * const) "TaskCal", 1024, NULL, 5, NULL) != pdPASS){
 		printf("Failed to create TaskCalculateLeftWheel\n");
 	}
-	
+	if (xTaskCreate(TaskUltraLjud, (const signed char * const) "TaskUltraLjud", 1024, NULL, 1, NULL) != pdPASS)
+	{
+		printf("Failed to create TaskCalculateLeftWheel\n");
+	}
 	vTaskStartScheduler();
 }
 

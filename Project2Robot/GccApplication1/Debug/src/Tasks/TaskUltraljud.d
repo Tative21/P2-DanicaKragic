@@ -1,5 +1,5 @@
-src/Tasks/TaskPIDRight.d src/Tasks/TaskPIDRight.o: \
- ../src/Tasks/TaskPIDRight.c ../src/asf.h \
+src/Tasks/TaskUltraljud.d src/Tasks/TaskUltraljud.o: \
+ ../src/Tasks/TaskUltraljud.c ../src/Tasks/TaskUltraljud.h ../src/asf.h \
  ../src/ASF/sam/drivers/adc/adc.h ../src/ASF/sam/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1437\arm-gnu-toolchain\lib\gcc\arm-none-eabi\4.8.4\include\stddef.h \
  ../src/ASF/common/utils/parts.h \
@@ -149,9 +149,9 @@ src/Tasks/TaskPIDRight.d src/Tasks/TaskPIDRight.o: \
  ../src/config/conf_uart_serial.h ../src/ASF/sam/drivers/tc/tc.h \
  ../src/ASF/sam/drivers/pio/pio_handler.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1437\arm-gnu-toolchain\arm-none-eabi\include\inttypes.h \
- ../src/Tasks/TaskPIDRight.h ../src/PWMFunctions/PWMFunctions.h \
- ../src/Tasks/TaskCalculateRightWheel.h ../src/Tasks/TaskMatlab.h \
- ../src/Tasks/TaskDriveLeftRight.h
+ ../src/init_pins.h
+
+../src/Tasks/TaskUltraljud.h:
 
 ../src/asf.h:
 
@@ -467,12 +467,4 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1437\arm-gnu
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1437\arm-gnu-toolchain\arm-none-eabi\include\inttypes.h:
 
-../src/Tasks/TaskPIDRight.h:
-
-../src/PWMFunctions/PWMFunctions.h:
-
-../src/Tasks/TaskCalculateRightWheel.h:
-
-../src/Tasks/TaskMatlab.h:
-
-../src/Tasks/TaskDriveLeftRight.h:
+../src/init_pins.h:
