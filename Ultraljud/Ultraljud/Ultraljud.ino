@@ -17,7 +17,9 @@
 #define TP_Right 32   
 #define EP_Right 33
 
-#define MaxDistance 35  //Max distance in cm
+#define MaxDistanceForward 35  //Max distance in cm
+#define MaxDistanceLeft 60
+#define MaxDistanceRight 60
 #define FORWARD 3       //Detect obstical in front
 #define LEFT  4         //Detect obstical left
 #define RIGHT 5         //Detect obstical right

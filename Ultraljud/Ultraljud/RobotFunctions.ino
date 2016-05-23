@@ -33,30 +33,33 @@ long TP_init(int TP, int EP){
 void obsticalCheck(long distance, int flag){
   /*When an obstical is detected the pin is set high*/
   if(flag==FORWARD){
-    if(distance > MaxDistance){
+    if(distance > MaxDistanceForward){
       digitalWrite(FORWARD, LOW);
-      Serial.println("Inget hinder");
-    }if(distance<MaxDistance){
+     // Serial.println("Inget hinder");
+    }if(distance<MaxDistanceForward){
       digitalWrite(FORWARD, HIGH);
-      Serial.println("HINDER");
+    //  Serial.println("HINDER");
     }
   }                                         //TA BORT SERIAL.PRINT
   if(flag==LEFT){
-    if(distance > MaxDistance){
+    if(distance > MaxDistanceLeft){
       digitalWrite(LEFT, LOW);
-      Serial.println("Inget hinder");
-    }if(distance<MaxDistance){
+   //   Serial.println("Inget hinder vänster");
+    }if(distance<MaxDistanceLeft){
       digitalWrite(LEFT, HIGH);
-      Serial.println("HINDER");  
+    //  Serial.println("HINDER vänster "); 
+    //  Serial.println(distance); 
     }
   }
   if(flag==RIGHT){
-    if(distance > MaxDistance){
+    Serial.println(distance);
+    if(distance > MaxDistanceRight){
       digitalWrite(RIGHT, LOW);
-      Serial.println("Inget hinder");
-    }if(distance<MaxDistance){
+    //  Serial.println("Inget hinder höger");
+    }if(distance<MaxDistanceRight){
       digitalWrite(RIGHT, HIGH);
-      Serial.println("HINDER");
+    //  Serial.println("HINDER höger");
+    //  Serial.println(distance);
     }
   }
 }
