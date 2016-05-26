@@ -1,6 +1,6 @@
 /*
  * Created 04-20-2016 
- * By Patricia Jönsson, Hamoud Abdoula and William Ouda
+ * By Patricia Jönsson, Hamoud Abdullah and William Ouda
  * 
  *Calculates the distance in form of cm or inches
  *  Distance_CM  = ((Duration of high level)*(Sonic :340m/s))/2
@@ -24,7 +24,7 @@ long TP_init(int TP, int EP){
   delayMicroseconds(10);
   digitalWrite(TP, LOW);
   long microseconds = pulseIn(EP,HIGH);   // waits for the pin to go HIGH, and returns the length of the pulse in microseconds
-  return microseconds;                    // return microseconds
+  return microseconds;                    
 }
 /*
  * Depending on witch flag a pin is set high
@@ -35,31 +35,23 @@ void obsticalCheck(long distance, int flag){
   if(flag==FORWARD){
     if(distance > MaxDistanceForward){
       digitalWrite(FORWARD, LOW);
-     // Serial.println("Inget hinder");
     }if(distance<MaxDistanceForward){
       digitalWrite(FORWARD, HIGH);
-    //  Serial.println("HINDER");
     }
-  }                                         //TA BORT SERIAL.PRINT
+  }                                        
   if(flag==LEFT){
     if(distance > MaxDistanceLeft){
       digitalWrite(LEFT, LOW);
-   //   Serial.println("Inget hinder vänster");
     }if(distance<MaxDistanceLeft){
       digitalWrite(LEFT, HIGH);
-    //  Serial.println("HINDER vänster "); 
-    //  Serial.println(distance); 
     }
   }
   if(flag==RIGHT){
     Serial.println(distance);
     if(distance > MaxDistanceRight){
       digitalWrite(RIGHT, LOW);
-    //  Serial.println("Inget hinder höger");
     }if(distance<MaxDistanceRight){
       digitalWrite(RIGHT, HIGH);
-    //  Serial.println("HINDER höger");
-    //  Serial.println(distance);
     }
   }
 }

@@ -5,7 +5,7 @@
  www.Elecfreak.com
 
  Modified 20/4-2016 
- by Patricia Jönsson, William Ouda and Hamoud Abdoula
+ by Patricia Jönsson, William Ouda and Hamoud Abdullah
  */
  
 #define CM 1      //Centimeter
@@ -18,8 +18,8 @@
 #define EP_Right 33
 
 #define MaxDistanceForward 35  //Max distance in cm
-#define MaxDistanceLeft 60
-#define MaxDistanceRight 60
+#define MaxDistanceLeft 50
+#define MaxDistanceRight 50
 #define FORWARD 3       //Detect obstical in front
 #define LEFT  4         //Detect obstical left
 #define RIGHT 5         //Detect obstical right
@@ -41,15 +41,6 @@ void loop(){
   obsticalCheck(distance_F, FORWARD);
   obsticalCheck(distance_R, RIGHT);
   obsticalCheck(distance_L, LEFT);
-  
- /* 
-  Serial.print("Distance Forward = ");
-  Serial.println(distance_F);
-  Serial.print("Distance Left = ");
-  Serial.println(distance_L);
-  //Serial.print("Distance Right = ");
-  //Serial.println(distance_R);
-  */
   
 
 }
