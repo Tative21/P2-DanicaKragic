@@ -1,6 +1,6 @@
 /*
  * Created 04-20-2016 
- * By Patricia Jönsson, William Ouda and Hamoud Abdoula
+ * By Patricia Jönsson
  * 
  * Initialses pins for the ultrasounds trigger pins,
  * echo pins and other needed pins.
