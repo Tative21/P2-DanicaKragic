@@ -1,29 +1,22 @@
 /*
 * TaskPIDRight.c
 *
-*  Author: Martin, Michael and Elvin
+*  Author: Martin, Michael and Elvin. Review by William.
 *
 * Content:  A task containing logic for PID-regulation for right wheel
 */
 
 #include <asf.h>
 #include <inttypes.h>
-#include "Tasks/TaskPIDRight.h"
 #include "PWMFunctions/PWMFunctions.h"
 #include "Tasks/TaskCalculateRightWheel.h"
-#include "Tasks/TaskPIDRight.h"
 #include "Tasks/TaskMatlab.h"
-#include "Tasks/TaskDriveLeftRight.h"
+#include "Tasks/TaskPIDRight.h"
 
-#define POSITIONS 6
-
-static uint32_t sampleTimeRight = 50;
+#define POSITIONS 4
+static uint32_t sampleTimeRight = 50; //  task time[ms]
 static float filterRight[POSITIONS] = {0};
-
 float desiredValueRight = 0;
-uint32_t theflagdriveright = 0;
-
-
 static float finalURight = 0;
 float errorRight = 0;
 static float prevErrorRight = 0;
@@ -31,9 +24,9 @@ static float wRight = 0;
 float currentVRight = 0;
 uint32_t hastighetRightWheel;
 
-static float kpRight = 1.366;		// 0.5
-static float kiRight = 2.703;	// 0.57
-static float kdRight = 0.026602;	// 0.1425
+static float kpRight = 0.66124;
+static float kiRight = 2.9641;
+static float kdRight = -0.039706;
 static float samplingTimeRight = 0.05;
 
 
@@ -52,15 +45,14 @@ void TaskPIDRight(void *p)
 	portTickType xSampleTime;
 	xLastWakeTime = xTaskGetTickCount();
 	int averageSensorValue = 0;
+	uint32_t temp = 0;
 	while(1){
 		xSampleTime = (portTickType)sampleTimeRight;
 		vTaskDelayUntil(&xLastWakeTime, xSampleTime); //Wait for the next cycle the task will be active.
 		
-		uint32_t temp;
-		
-		if(desiredValueRight != 0){
+		if((desiredValueRight > 0.0) && (desiredValueRight < 5)){
+			//Moving average
 			filterRight[POSITIONS-1] = hastighetRightWheel;
-			
 			
 			for(int i = 0; i<POSITIONS; i++)
 			{
@@ -73,105 +65,106 @@ void TaskPIDRight(void *p)
 			{
 				filterRight[i] = filterRight[i+1];
 			}
-
+			
 			filterRight[POSITIONS-1] = 0;
+			// End of moving average
+			
 			currentVRight = averageSensorValue;
-			errorRight =  (float) ((float)desiredValueRight - (float)currentVRight/1000);
+			errorRight =  (float) ((float)desiredValueRight - (float)currentVRight/1000); // current error
+			
+			prevErrorRight = errorRight;													// previous error
+			wRight = wRight + errorRight;													// sum of error
 
-			prevErrorRight = errorRight;
-			wRight = wRight + errorRight;
-
-			finalURight = (float)CalcSignalRight(samplingTimeRight, kpRight, kiRight, kdRight, errorRight, prevErrorRight, wRight);
-			temp = finalURight*1000;
-		}
-		else{
+			finalURight = (float)CalcSignalRight(samplingTimeRight, kpRight, kiRight, kdRight, errorRight, prevErrorRight, wRight); // control signal
+			if(finalURight < 0)
+			{
+				finalURight = 0;
+			}
+			valuesforPWMRight(finalURight);
+			//temp = finalURight * 1000;
+			//SendControlSignalLeftPID(temp, desiredValueRight,errorRight,averageSensorValue); // this function is used to set the values which will be sent to matlab.
+		}else if (desiredValueRight == 0) // standby
+		{
+			wRight = 0;
 			finalURight = 0.0;
-			averageSensorValue = 0;
-			temp = 0;
-			currentVRight = 0;
-			valuesforPWMRight(1500);
+			valuesforPWMRight(finalURight);
+		}else if(desiredValueRight == 5) // backward
+		{
+			wRight  = 0;
+			RightWheelPWM(1690);
 		}
-		
-		valuesforPWMRight(finalURight);
-		SendControlSignalLeftPID(temp, desiredValueRight,errorRight,averageSensorValue);
-		
 	}
 }
 
 /**************************************************************************
 The PID-regulator.
 **************************************************************************/
-float CalcSignalRight(float sampTime, float k_p, float k_i, float k_d, float currErr, float prevErr, int32_t sumErr)
+float CalcSignalRight(float sampTime, float k_p, float k_i, float k_d, float currErr, float prevErr, float sumErr)
 {
 	float proportionalPart;
 	float integralPart;
 	float derivingPart;
 	float signal;
-	
+
 	proportionalPart = (float)currErr;
 	integralPart = (float)(sumErr * (sampTime/k_i));
 	derivingPart = ((float)currErr - (float)prevErr) * (float)(k_d / sampTime);
 	signal = (float)k_p * ((float)(proportionalPart + integralPart + derivingPart));
-
 	return signal;
 }
-
 
 /*********************************************
 Function for translating actual speed values to PWM signals.
 ***********************************************/
 void valuesforPWMRight(float finalULeft){
 	
-	if(theflagdriveright == 0){
-		if(finalULeft <= 0.017){
-			RightWheelPWM(1500);
-		}
+	if(finalULeft <= 0.017){
+		RightWheelPWM(1500);
 	}
-	if(theflagdriveright == 2){
-		if(finalULeft >= 0.018 && finalULeft <= 0.029){
-			RightWheelPWM(1390);
-		}
-		else if(finalULeft >= 0.03 && finalULeft <= 0.055){
-			RightWheelPWM(1370);
-		}
-		else if(finalULeft >= 0.056 && finalULeft <= 0.085){
-			RightWheelPWM(1350);
-		}
-		else if(finalULeft >= 0.086 && finalULeft <= 0.128){
-			RightWheelPWM(1330);
-		}
-		else if(finalULeft >= 0.129 && finalULeft <= 0.155){
-			RightWheelPWM(1310);
-		}
-		else if(finalULeft >= 0.156 && finalULeft <= 0.182){
-			RightWheelPWM(1290);
-		}
-		else if(finalULeft >= 0.183 && finalULeft <= 0.220){
-			RightWheelPWM(1270);
-		}
-		else if(finalULeft >= 0.221 && finalULeft <= 0.267){
-			RightWheelPWM(1250);
-		}
-		else if(finalULeft >= 0.268 && finalULeft <= 0.334){
-			RightWheelPWM(1230);
-		}
-		else if(finalULeft >= 0.335 && finalULeft <= 0.372){
-			RightWheelPWM(1210);
-		}
-		else if(finalULeft > 0.372){
-			RightWheelPWM(1200);
-		}
-		
-		}
-		if(theflagdriveright == 1){
-		RightWheelPWM(1700);
+	else if(finalULeft >= 0.018 && finalULeft <= 0.029){
+		RightWheelPWM(1390);
+	}
+	else if(finalULeft >= 0.03 && finalULeft <= 0.055){
+		RightWheelPWM(1370);
+	}
+	else if(finalULeft >= 0.056 && finalULeft <= 0.085){
+		RightWheelPWM(1350);
+	}
+	else if(finalULeft >= 0.086 && finalULeft <= 0.128){
+		RightWheelPWM(1330);
+	}
+	else if(finalULeft >= 0.129 && finalULeft <= 0.155){
+		RightWheelPWM(1310);
+	}
+	else if(finalULeft >= 0.156 && finalULeft <= 0.182){
+		RightWheelPWM(1290);
+	}
+	else if(finalULeft >= 0.183 && finalULeft <= 0.220){
+		RightWheelPWM(1270);
+	}
+	else if(finalULeft >= 0.221 && finalULeft <= 0.267){
+		RightWheelPWM(1250);
+	}
+	else if(finalULeft >= 0.268 && finalULeft <= 0.334){
+		RightWheelPWM(1230);
+	}
+	else if(finalULeft >= 0.335 && finalULeft <= 0.372){
+		RightWheelPWM(1210);
+	}
+	else if(finalULeft > 0.372){
+		RightWheelPWM(1200);
 	}
 }
+/*********************************************************
+Returns desiredValue.
+**********************************************************/
+float getDesiredValueRight(void){
+	return desiredValueRight;
+}
 
-/*
-* Sets value for drive forward and backwards and the setpoint for PID-regulator
-*/
-void SetPointRightWheel(float setPoint,uint32_t drive){
-	desiredValueRight = setPoint;
-	theflagdriveright = drive;
+/*********************************************************
+Sets value for drive forward and backwards and the setpoint for PID-regulator
+**********************************************************/
+void setDesiredValueRight(float tempdesire){
+	desiredValueRight = tempdesire;
 }

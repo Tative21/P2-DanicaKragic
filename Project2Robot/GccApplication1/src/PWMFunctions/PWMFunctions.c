@@ -1,11 +1,11 @@
- /*
- * PWMFunctions.c
- *
- * Author: Michael och Martin. Comments written by Michael.
- * 
- * Content: Initializes PWM. Initializes pin 38 och 40 on the DUE
- * for PWM. Functions for writing PWM values to the engines.   
- */ 
+/*
+* PWMFunctions.c
+*
+* Author: Michael and Martin. Comments written by Michael.
+*
+* Content: Initializes PWM. Initializes pin 38 och 40 on the DUE
+* for PWM. Functions for writing PWM values to the engines.
+*/
 
 #include <asf.h>
 #include "PWMFunctions.h"
@@ -14,10 +14,9 @@ pwm_channel_t PWMPin40;
 pwm_channel_t PWMPin38;
 
 /************************************************************************
-* Configuration of the Pulse Width Modulation (PWM). 
-/************************************************************************/
-void PWMInit(void)
-{
+Configuration of the Pulse Width Modulation (PWM).
+************************************************************************/
+void PWMInit(void){
 	pmc_enable_periph_clk(ID_PWM);
 	pwm_channel_disable(PWM, PWM_CHANNEL_3);
 	pwm_channel_disable(PWM, PWM_CHANNEL_2);
@@ -34,8 +33,8 @@ void PWMInit(void)
 }
 
 /************************************************************************
-* Initiation of digital pin 40 on the Arduino Due board. 
-/************************************************************************/
+Initiation of digital pin 40 on the Arduino Due board for PWM.
+************************************************************************/
 void InitPIN40(void)
 {
 	PWMPin40.channel = PWM_CHANNEL_3;
@@ -48,10 +47,9 @@ void InitPIN40(void)
 }
 
 /************************************************************************
-* Initiation of digital pin 38 on the Arduino Due board.
-/************************************************************************/
-void InitPIN38(void)
-{
+Initiation of digital pin 40 on the Arduino Due board for PWM.
+************************************************************************/
+void InitPIN38(void){
 	PWMPin38.channel = PWM_CHANNEL_2;
 	PWMPin38.ul_prescaler = PWM_CMR_CPRE_CLKA;
 	PWMPin38.ul_duty = 0;
@@ -63,17 +61,16 @@ void InitPIN38(void)
 
 
 /************************************************************************
-* Function for setting a PWM value to the left engine. 
+* Updates the output value for the left wheel.
 /************************************************************************/
 void LeftWheelPWM(uint32_t dutyCycle)
 {
-	pwm_channel_update_duty(PWM, &PWMPin40, dutyCycle);
+pwm_channel_update_duty(PWM, &PWMPin40, dutyCycle);
 }
 
 /************************************************************************
-* Function for setting a PWM value to the right engine.
+* Updates the output value for the right wheel.
 /************************************************************************/
-void RightWheelPWM(uint32_t dutyCycle)
-{
-	pwm_channel_update_duty(PWM, &PWMPin38, dutyCycle);
+void RightWheelPWM(uint32_t dutyCycle){
+pwm_channel_update_duty(PWM, &PWMPin38, dutyCycle);
 }

@@ -1,12 +1,16 @@
 /*
- * JoystickOptions.h
- *
- * Author: Michael and Martin
- */ 
+* JoystickOptions.h
+*
+*  Author: Michael och Martin
+*/
+
 
 
 #ifndef JOYSTICKOPTIONS_H_
 #define JOYSTICKOPTIONS_H_
+
+
+
 
 void TaskDriveLeftRight(void *p);
 

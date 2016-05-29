@@ -1,9 +1,10 @@
 /*
- * init_pins.h
- *
- * Created: 2016-05-16 11:37:39
- *  Author: William
- */ 
+* init_pins.h
+*
+* This file is design to make it easier to declare and set a pin to output/input etc.
+*
+* Author: William
+*/
 
 
 #ifndef INIT_PINS_H_
@@ -25,10 +26,10 @@
 #define pin6 PIO_PC24_IDX
 #define pin7 PIO_PC23_IDX
 #define pin8 PIO_PC22_IDX
-
+#define pin31 PIO_PA7_IDX
 #define pin11 PIO_PD7_IDX
 #define pin12 PIO_PD8_IDX
 #define pin13 PIO_PB27_IDX
 
-extern int drive;
+extern uint32_t drive;
 #endif /* INIT_PINS_H_ */

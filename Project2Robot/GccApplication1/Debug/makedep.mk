@@ -20,8 +20,6 @@ src\Tasks\TaskUltraljud.c
 
 src\ASF\sam\drivers\tc\tc.c
 
-src\DelayFunctions\DelayFunctions.c
-
 src\Tasks\TaskCalculateLeftWheel.c
 
 src\Tasks\TaskCalculateRightWheel.c

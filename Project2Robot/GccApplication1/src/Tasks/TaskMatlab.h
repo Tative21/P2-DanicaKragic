@@ -1,9 +1,8 @@
 /*
- * TaskMatlab.h
- *
- *  Author: Martin and Michael
- */ 
-
+* TaskMatlab.h
+*
+*  Author: Martin and Michael
+*/
 
 #ifndef TASKMATLAB_H_
 #define TASKMATLAB_H_

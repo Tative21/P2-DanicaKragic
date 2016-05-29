@@ -241,7 +241,7 @@
         <documentation help="http://asf.atmel.com/docs/3.21.0/common.applications.user_application.arduino_due_x/html/index.html" />
         <offline-documentation help="" />
         <dependencies>
-          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.6.0" />
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.21.0" />
         </dependencies>
         <project id="common.applications.user_application.arduino_due_x" value="Add" config="" content-id="Atmel.ASF" />
         <board id="board.arduino_due_x" value="Add" config="" content-id="Atmel.ASF" />
@@ -537,12 +537,6 @@
       <SubType>compile</SubType>
     </None>
     <Compile Include="src\ASF\sam\drivers\tc\tc.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\DelayFunctions\DelayFunctions.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\DelayFunctions\DelayFunctions.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\Tasks\TaskCalculateLeftWheel.c">
@@ -1187,7 +1181,6 @@
     <Folder Include="src\ASF\thirdparty\wireless\addons\sio2host\uart\" />
     <Folder Include="src\config\" />
     <Folder Include="src\adc" />
-    <Folder Include="src\DelayFunctions" />
     <Folder Include="src\Interrupts\" />
     <Folder Include="src\SerialUARTFunctions" />
     <Folder Include="src\PWMFunctions" />

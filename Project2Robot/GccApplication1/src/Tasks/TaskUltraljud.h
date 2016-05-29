@@ -1,8 +1,7 @@
 /*
  * TaskUltraljud.h
  *
- * Created: 2016-05-16 15:19:49
- *  Author: William
+ * Author: William
  */ 
 
 

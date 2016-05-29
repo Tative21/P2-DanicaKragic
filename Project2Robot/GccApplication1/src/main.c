@@ -1,30 +1,31 @@
 /*
-*
+* main.c
 *
 * Authors: Michael och Martin
-* 
 */
- 
+
 #include <asf.h>
 #include <inttypes.h>
 #include "stdio/stdio_serial/stdio_serial.h"
 #include "SerialUARTFunctions/SerialUART.h"
-#include "adc/adcFunctions.h"
 #include "Tasks/TaskCalculateLeftWheel.h"
 #include "Tasks/TaskDriveLeftRight.h"
 #include "Tasks/TaskPIDLeft.h"
 #include "Tasks/TaskCalculateRightWheel.h"
 #include "Tasks/TaskMatlab.h"
-#include "DelayFunctions/DelayFunctions.h"
+#include "Tasks/TaskPIDRight.h"
+#include "Tasks/TaskUltraljud.h"
 #include "conf_board.h"
 #include "Interrupts/InterruptPioLeftWheel.h"
 #include "Interrupts/InterruptPioRightWheel.h"
-#include "Tasks/TaskPIDRight.h"
+#include "adc/adcFunctions.h"
 #include "PWMFunctions/PWMFunctions.h"
-#include "Tasks/TaskUltraljud.h"
-#include "init_pins.h"
 
 
+
+/**************************************
+* Initializing terminal window.
+**************************************/
 int configureConsole(void)
 /* Enables feedback through the USB-cable back to terminal within Atmel Studio */
 {
@@ -37,67 +38,48 @@ int configureConsole(void)
 	sysclk_enable_peripheral_clock(CONSOLE_UART_ID);
 	stdio_serial_init(CONF_UART, &uart_serial_options);
 
-	/* printf("Console ready\n"); */
 	return 0;
 }
-
+/**************************************************
+* main method. Initialize every thing.
+***************************************************/
 int main (void)
 {
-	// Insert system clock initialization code here (sysclk_init()).
+	// initializing A/D, PWM Time counter, Interrupts etc.
 	sysclk_init();
 	board_init();
 	analogInit();
 	setupUART();
 	configureConsole();
-	delayInit();	
 	configure_tc_LeftWheel();
 	configure_tc_RightWheel();
 	configure_interrupt_pio_LeftWheel();
 	configure_interrupt_pio_RightWheel();
 	PWMInit();
 
-
-//Ultraljud
-<<<<<<< HEAD
-
-=======
-	/*
-	ioport_set_pin_dir(PIO_PD9_IDX,Output);
-	ioport_set_pin_dir(PIO_PC4_IDX,Input);
-			while(1){
-			printf("%d",ioport_get_pin_level(PIO_PC4_IDX));
-			if(ioport_get_pin_level(PIO_PC4_IDX)){
-				ioport_set_pin_level(PIO_PD9_IDX,HIGH);
-				}else{
-				ioport_set_pin_level(PIO_PD9_IDX,LOW);
-			}
-			}
-	
-	*/
->>>>>>> refs/remotes/origin/master
-
-	if (xTaskCreate(TaskDriveLeftRight, (const signed char * const) "TaskDriveLeftRight", 1024, NULL, 3, NULL) != pdPASS){
+	/*Start every Task*/
+	if (xTaskCreate(TaskDriveLeftRight, (const signed char * const) "TaskDrive", 1024, NULL, 2, NULL) != pdPASS){
 		printf("Failed to create TaskDriveLeftRight\n");
 	}
-	if (xTaskCreate(TaskMatLab, (const signed char * const) "TaskDriveForward", 1024, NULL, 1, NULL) != pdPASS){
+	if (xTaskCreate(TaskMatLab, (const signed char * const) "TaskMatlab", 1024, NULL, 1, NULL) != pdPASS){
 		printf("Failed to create TaskDriveForward\n");
 	}
-	if (xTaskCreate(TaskPIDLeft, (const signed char * const) "TaskDriveForward", 1024, NULL, 5, NULL) != pdPASS){
+	if (xTaskCreate(TaskPIDLeft, (const signed char * const) "TaskPIDLeft", 1024, NULL, 3, NULL) != pdPASS){
 		printf("Failed to create TaskDriveForward\n");
 	}
-	if (xTaskCreate(TaskPIDRight, (const signed char * const) "TaskDriveForward", 1024, NULL, 2, NULL) != pdPASS){
+	if (xTaskCreate(TaskPIDRight, (const signed char * const) "TaskPIDRight", 1024, NULL, 3, NULL) != pdPASS){
 		printf("Failed to create TaskDriveForward\n");
 	}
-	if (xTaskCreate(TaskCalculateLeftWheel, (const signed char * const) "TaskCal", 1024, NULL, 4, NULL) != pdPASS){
+	if (xTaskCreate(TaskCalculateLeftWheel, (const signed char * const) "TaskCalcLeft", 1024, NULL, 4, NULL) != pdPASS){
 		printf("Failed to create TaskCalculateLeftWheel\n");
 	}
-	if (xTaskCreate(TaskCalculateRightWheel, (const signed char * const) "TaskCal", 1024, NULL, 5, NULL) != pdPASS){
+	if (xTaskCreate(TaskCalculateRightWheel, (const signed char * const) "TaskCalcRight", 1024, NULL, 4, NULL) != pdPASS){
 		printf("Failed to create TaskCalculateLeftWheel\n");
 	}
-	if (xTaskCreate(TaskUltraLjud, (const signed char * const) "TaskUltraLjud", 1024, NULL, 1, NULL) != pdPASS)
-	{
+	if (xTaskCreate(TaskUltraLjud, (const signed char * const) "TaskUltra", 1024, NULL, 1, NULL) != pdPASS){
 		printf("Failed to create TaskCalculateLeftWheel\n");
 	}
+	
 	vTaskStartScheduler();
 }
 

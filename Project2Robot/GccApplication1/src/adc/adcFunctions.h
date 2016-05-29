@@ -1,7 +1,8 @@
 /*
  * adcFunctions.h
  *
- *  Author: Martin, William och Elvin
+ * Created: 2016-04-10 13:01:19
+ *  Author: Martin William Elvin
  */ 
 
 
